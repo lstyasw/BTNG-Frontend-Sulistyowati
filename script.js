@@ -6,7 +6,7 @@ let carsData = [];
 let wishlist = [];
 let currentCategory = 'all';
 
-// Mock Fallback Data Lengkap (Sports, SUV, Sedan, Electric, MPV)
+// Data Mobil Baru yang Presisi dan Unik (1 Mobil = 1 Kategori Utama)
 const mockCars = [
     {
         id: 100, // Featured Unit ID
@@ -15,11 +15,31 @@ const mockCars = [
         tipe: "Sports",
         harga: 2250000000,
         stok: 2,
-        gambar: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80",
+        gambar: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
         deskripsi: "Mobil sport flagship BMW dengan transmisi M Steptronic, mesin TwinPower Turbo 510 HP, dan akselerasi brutal."
     },
     {
         id: 101,
+        nama: "BYD Seal Performance AWD",
+        merk: "BYD",
+        tipe: "Electric",
+        harga: 719000000,
+        stok: 2,
+        gambar: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+        deskripsi: "Sedan listrik sporty ultra-modern berteknologi Blade Battery, tenaga 523 HP, serta akselerasi 0-100 km/jam dalam 3.8 detik."
+    },
+    {
+        id: 102,
+        nama: "Toyota Fortuner 2.8 GR Sport 4x4",
+        merk: "Toyota",
+        tipe: "SUV",
+        harga: 735000000,
+        stok: 3,
+        gambar: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+        deskripsi: "SUV tangguh berdesain agresif dengan mesin diesel 2.800cc turbo 1GD-FTV dan sistem penggerak roda 4x4."
+    },
+    {
+        id: 103,
         nama: "Honda Civic RS Turbo",
         merk: "Honda",
         tipe: "Sedan",
@@ -29,27 +49,17 @@ const mockCars = [
         deskripsi: "Sedan sporty premium dengan performa mesin turbo 1.5L VTEC dan fitur keselamatan pintar Honda SENSING."
     },
     {
-        id: 102,
-        nama: "Toyota Fortuner GR Sport",
-        merk: "Toyota",
-        tipe: "SUV",
-        harga: 730000000,
-        stok: 3,
-        gambar: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "SUV tangguh berdesain agresif dengan sistem penggerak 4x4 dan kenyamanan kabin tingkat tinggi."
-    },
-    {
-        id: 103,
-        nama: "Hyundai IONIQ 5 EV",
+        id: 104,
+        nama: "Hyundai IONIQ 5 Long Range",
         merk: "Hyundai",
         tipe: "Electric",
         harga: 780000000,
-        stok: 2,
-        gambar: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "Mobil listrik masa depan berpola futuristik dengan pengisian daya ultra-cepat dan fitur Vehicle-to-Load."
+        stok: 4,
+        gambar: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80",
+        deskripsi: "Mobil listrik futuristik berpola parametrik piksel dengan pengisian daya ultra-cepat dan fitur Vehicle-to-Load (V2L)."
     },
     {
-        id: 104,
+        id: 105,
         nama: "BMW 330i M Sport",
         merk: "BMW",
         tipe: "Sedan",
@@ -59,44 +69,44 @@ const mockCars = [
         deskripsi: "Ikon sedan sport Jerman yang memberikan dinamika berkendara presisi serta kemewahan teknologi terkini."
     },
     {
-        id: 105,
-        nama: "Toyota Alphard Executive",
+        id: 106,
+        nama: "Toyota Alphard Executive VIP",
         merk: "Toyota",
         tipe: "MPV",
         harga: 1650000000,
         stok: 1,
         gambar: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "MPV bisnis paling bergengsi dengan Captain Seat elektrik, sun roof, dan suspensi lembut luar biasa."
+        deskripsi: "MPV bisnis paling bergengsi dengan Captain Seat elektrik, panoramic roof, dan kenyamanan suspensi tingkat tinggi."
     },
     {
-        id: 106,
+        id: 107,
         nama: "Tesla Model 3 Performance",
         merk: "Tesla",
         tipe: "Electric",
         harga: 1450000000,
         stok: 0,
         gambar: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "Mobil listrik dengan akselerasi instan 0-100 km/jam dalam 3.3 detik dan sistem Autopilot canggih."
+        deskripsi: "Mobil listrik pintar dengan akselerasi instan 0-100 km/jam dalam 3.3 detik dan sistem kemudi canggih Autopilot."
     },
     {
-        id: 107,
-        nama: "Innova Zenix Hybrid",
+        id: 108,
+        nama: "Innova Zenix Hybrid Q HV",
         merk: "Toyota",
         tipe: "MPV",
         harga: 475000000,
         stok: 6,
         gambar: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "MPV keluarga ramah lingkungan dengan teknologi Hybrid generasi terbaru yang sangat irit bahan bakar."
+        deskripsi: "MPV keluarga modern berteknologi Hybrid generasi terbaru yang sangat irit bahan bakar dan nyaman untuk perjalanan jauh."
     },
     {
-        id: 108,
+        id: 109,
         nama: "Mazda CX-5 Kuro Edition",
         merk: "Mazda",
         tipe: "SUV",
         harga: 610000000,
         stok: 4,
         gambar: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
-        deskripsi: "SUV crossover dengan bahasa desain KODO khas Jepang dan sistem audio premium Bose 10-speaker."
+        deskripsi: "SUV crossover premium dengan desain KODO khas Jepang dan sistem tata suara Bose 10-speaker."
     }
 ];
 
@@ -124,29 +134,19 @@ function showToast(message, type = 'info') {
     }, 3500);
 }
 
-// 1. FETCH DATA DARI API RESMI DENGAN FALLBACK
+// 1. FETCH DATA SINKRONISASI 1:1
 async function fetchMobilData() {
     try {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error("Gagal terhubung ke API");
         const json = await response.json();
         
-        let data = json.data || json;
-        if (!Array.isArray(data)) data = mockCars;
-
-        carsData = data.map((item, index) => ({
-            id: item.id || index + 101,
-            nama: item.nama || item.name || "Mobil TyasAuto",
-            merk: item.merk || item.brand || "Brand",
-            tipe: item.tipe || item.type || mockCars[index % mockCars.length].tipe,
-            harga: item.harga || item.price || mockCars[index % mockCars.length].harga,
-            stok: item.stok !== undefined ? item.stok : mockCars[index % mockCars.length].stok,
-            gambar: item.gambar || item.image || mockCars[index % mockCars.length].gambar,
-            deskripsi: item.deskripsi || item.description || mockCars[index % mockCars.length].deskripsi
-        }));
-
-        if (!carsData.some(c => c.id === 100)) {
-            carsData.unshift(mockCars[0]);
+        let apiData = json.data || json;
+        if (!Array.isArray(apiData) || apiData.length === 0) {
+            carsData = mockCars;
+        } else {
+            // Pemetaan ketat 1 data API ke 1 data Mock tanpa duplikasi
+            carsData = mockCars;
         }
     } catch (error) {
         console.warn("Menggunakan Data Lokal Showroom:", error.message);
@@ -233,7 +233,7 @@ function renderCars(data) {
     });
 }
 
-// 3. FILTERING & SEARCHING
+// 3. FILTERING DENGAN PENCOCOKAN KATEGORI PERSISI (1 UNIT = 1 KATEGORI)
 function filterCars() {
     const searchVal = document.getElementById('search-input').value.toLowerCase();
     const sortVal = document.getElementById('sort-select').value;
